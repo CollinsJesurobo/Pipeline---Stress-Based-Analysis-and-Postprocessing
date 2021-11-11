@@ -1,0 +1,11 @@
+#Parametric study file to create different load cases
+partList=['wt']                                    #thickness to be varied in the inputfile
+thick=parStudy(par=partList)
+thick.define(DISCRETE, par=partList)
+thick.sample(VALUES, par='wt', values=(0.0159, 0.0191,0.0223,0.0251,0.0271,0.0302)) 
+thick.combine(MESH )
+thick.generate(template='FEA')                                #generate all input file from basecase inputfile
+thick.execute(ALL)                                                     #execute all input files 
+thick.output(file=ODB, instance='PART-1-1', request=FIELD, inc=LAST)
+
+# parameteric study completed
